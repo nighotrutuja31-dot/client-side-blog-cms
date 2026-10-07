@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blogify | Modern Blog CMS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                B
+            </div>
+
+            <div>
+                <h1>Blogify</h1>
+                <p>Content Studio</p>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#home">Home</a>
+            <a href="#posts">Explore</a>
+            <a href="#dashboard">Dashboard</a>
+
+        </nav>
+
+
+        <button class="create-btn" onclick="openEditor()">
+            <span>+</span>
+            Create Post
+        </button>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                ✦ YOUR PERSONAL CONTENT STUDIO
+            </span>
+
+            <h2>
+                Ideas become
+                <span>stories.</span>
+            </h2>
+
+            <p>
+                Create, manage and publish beautiful blog posts
+                from one simple client-side content manager.
+            </p>
+
+            <button class="hero-btn" onclick="openEditor()">
+                Start Writing
+                <span>→</span>
+            </button>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="floating-card card-one">
+                <span>📈</span>
+                <div>
+                    <strong>+28%</strong>
+                    <small>Engagement</small>
+                </div>
+            </div>
+
+
+            <div class="hero-image-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85"
+                    alt="Developer workspace"
+                >
+
+                <div class="image-overlay">
+
+                    <span>FEATURED STORY</span>
+
+                    <h3>
+                        Build. Learn. Create.
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card card-two">
+
+                <div class="mini-avatar">
+                    R
+                </div>
+
+                <div>
+                    <strong>Rutuja</strong>
+                    <small>Creator</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main class="main-container" id="dashboard">
+
+        <section class="stats-section">
+
+            <div class="stat-box">
+
+                <div class="stat-icon purple">
+                    📝
+                </div>
+
+                <div>
+                    <span>Total Posts</span>
+                    <strong id="totalPosts">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon orange">
+                    📢
+                </div>
+
+                <div>
+                    <span>Published</span>
+                    <strong id="publishedPosts">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon yellow">
+                    📄
+                </div>
+
+                <div>
+                    <span>Drafts</span>
+                    <strong id="draftPosts">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div class="stat-icon green">
+                    ❤️
+                </div>
+
+                <div>
+                    <span>Total Likes</span>
+                    <strong id="totalLikes">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BLOG SECTION ================= -->
+
+        <section class="blog-section" id="posts">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="section-label">
+                        LATEST STORIES
+                    </span>
+
+                    <h2>
+                        Explore the blog
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="outline-btn"
+                    onclick="openEditor()"
+                >
+                    + New Story
+                </button>
+
+            </div>
+
+
+            <!-- ================= SEARCH ================= -->
+
+            <div class="controls">
+
+                <div class="search">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search stories, authors or categories..."
+                        oninput="renderPosts()"
+                    >
+
+                </div>
+
+
+                <div class="filters">
+
+                    <button
+                        class="filter active"
+                        onclick="setFilter('all', this)"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('published', this)"
+                    >
+                        Published
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('draft', this)"
+                    >
+                        Drafts
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('featured', this)"
+                    >
+                        ⭐ Featured
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= POSTS ================= -->
+
+            <div
+                id="postsContainer"
+                class="posts-container"
+            ></div>
+
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+
+                <div class="empty-icon">
+                    ✍️
+                </div>
+
+                <h3>
+                    No stories found
+                </h3>
+
+                <p>
+                    Try another search or create your first story.
+                </p>
+
+                <button
+                    class="create-btn"
+                    onclick="openEditor()"
+                >
+                    Create Story
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= EDITOR MODAL ================= -->
+
+    <div
+        id="editorModal"
+        class="modal"
+    >
+
+        <div class="editor-modal">
+
+            <div class="modal-title">
+
+                <div>
+
+                    <span class="section-label">
+                        CONTENT EDITOR
+                    </span>
+
+                    <h2 id="editorHeading">
+                        Create a new story
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="close"
+                    onclick="closeEditor()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="postForm">
+
+                <input
+                    type="hidden"
+                    id="postId"
+                >
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Cover Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="postImage"
+                        placeholder="https://example.com/image.jpg"
+                    >
+
+                    <div
+                        id="imagePreview"
+                        class="image-preview"
+                    >
+                        <span>🖼️ Image preview</span>
+                    </div>
+
+                </div>
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Story Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="postTitle"
+                        placeholder="Write an attractive title..."
+                        required
+                    >
+
+                </div>
+
+
+                <!-- AUTHOR / CATEGORY -->
+
+                <div class="two-columns">
+
+                    <div class="form-group">
+
+                        <label>
+                            Author *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="postAuthor"
+                            placeholder="Your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="postCategory">
+
+                            <option>
+                                Technology
+                            </option>
+
+                            <option>
+                                Programming
+                            </option>
+
+                            <option>
+                                Data Science
+                            </option>
+
+                            <option>
+                                AI & ML
+                            </option>
+
+                            <option>
+                                Education
+                            </option>
+
+                            <option>
+                                Lifestyle
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXCERPT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Short Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="postExcerpt"
+                        maxlength="180"
+                        placeholder="A short summary of your story..."
+                    >
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Story Content *
+                    </label>
+
+                    <textarea
+                        id="postContent"
+                        rows="9"
+                        placeholder="Start writing your story..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- STATUS / FEATURED -->
+
+                <div class="editor-options">
+
+                    <div class="option-box">
+
+                        <span>
+                            Publication Status
+                        </span>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="status"
+                                value="draft"
+                                checked
+                            >
+                            Draft
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="status"
+                                value="published"
+                            >
+                            Published
+                        </label>
+
+                    </div>
+
+
+                    <label class="featured-check">
+
+                        <input
+                            type="checkbox"
+                            id="postFeatured"
+                        >
+
+                        ⭐ Mark as Featured
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeEditor()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Story
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PREVIEW MODAL ================= -->
+
+    <div
+        id="previewModal"
+        class="modal"
+    >
+
+        <div class="preview-modal">
+
+            <button
+                class="close preview-x"
+                onclick="closePreview()"
+            >
+                ×
+            </button>
+
+
+            <img
+                id="previewImage"
+                class="preview-image"
+                src=""
+                alt="Blog image"
+            >
+
+
+            <div class="preview-body">
+
+                <div class="preview-category" id="previewCategory">
+                </div>
+
+                <h1 id="previewTitle">
+                </h1>
+
+                <div
+                    id="previewMeta"
+                    class="preview-meta"
+                >
+                </div>
+
+                <div
+                    id="previewText"
+                    class="preview-text"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div
+        id="toast"
+        class="toast"
+    >
+        Story saved successfully!
+    </div>
+
+
+    <footer>
+
+        <div>
+            <strong>Blogify</strong>
+            <span> — Your ideas, beautifully published.</span>
+        </div>
+
+        <p>
+            Client-Side Blog CMS • HTML • CSS • JavaScript • LocalStorage
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
